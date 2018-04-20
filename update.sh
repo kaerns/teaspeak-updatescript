@@ -14,7 +14,7 @@ fi
 echo "# version url ${versionurl}"
 version=$(curl -k https://repro.teaspeak.de/${versionurl})
 echo "# newest version is ${version}"
-requesturl="https://repro.teaspeak.de/server/linux/x64/TeaSpeak-${version}.tar.gz"
+requesturl="https://repo.teaspeak.de/server/linux/x64/TeaSpeak-${version}.tar.gz"
 echo "# requesting from ${requesturl}"
 wget "$requesturl"
 filename="TeaSpeak-${version}.tar.gz"
