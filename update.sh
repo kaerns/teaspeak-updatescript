@@ -12,7 +12,7 @@ exit 1
 fi
 fi
 echo "# version url ${versionurl}"
-version=$(curl -k https://repro.teaspeak.de/${versionurl})
+version=$(curl -k https://repo.teaspeak.de/${versionurl})
 echo "# newest version is ${version}"
 requesturl="https://repo.teaspeak.de/server/linux/x64/TeaSpeak-${version}.tar.gz"
 echo "# requesting from ${requesturl}"
