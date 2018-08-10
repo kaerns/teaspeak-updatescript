@@ -3,7 +3,7 @@ echo "# TeaSpeak Updater by essemX (github.com/essemX/teaspeak-updatescript)"
 echo "# Getting version..."
 version=$(curl -s -S -k https://repo.teaspeak.de/latest)
 echo "# Newest version is ${version}"
-requesturl="https://repo.teaspeak.de/server/linux/x86/TeaSpeak-${version}.tar.gz"
+requesturl="https://repo.teaspeak.de/server/linux/amd64/TeaSpeak-${version}.tar.gz"
 echo "# Downloading ${requesturl}"
 curl -s -S "$requesturl" -o updatefile.tar.gz
 echo "# Backing up config and database"
