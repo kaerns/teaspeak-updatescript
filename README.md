@@ -1,1 +1,1 @@
-# teaspek-updatescript
+# teaspeak-updatescript
