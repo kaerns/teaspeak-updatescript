@@ -41,9 +41,13 @@ echo "# TeaSpeak should be now updated to ${version}"
 }
 
 if [ "$1" != "" ]; then
-    echo "# Grabbing latest beta version"
-    branch="_optimized"
-    update_teaspeak
+    if [ "$1" = "beta"]; then
+      echo "# Grabbing latest beta version"
+      branch="_optimized"
+      update_teaspeak
+    else
+      echo "# This is not a valid argument. You can run the file with no argument for the stable version, or with the beta argument to grab the latest beta version."
+    fi
 else
     echo "# Grabbing latest stable version"
     branch=""
