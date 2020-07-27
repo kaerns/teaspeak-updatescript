@@ -13,13 +13,12 @@ This script will pull the latest version from the teaspeak site, unpack it and b
 
 ## Optional Arguments
 
-* -b, --beta     use the optimized build
-* -h, --help     display this message and exit
+Usage: `update.sh [-h, -b]`
 
-
-## Disclaimer
-
-Except as represented in this agreement, all work product by Developer is provided *“AS IS”*. Other than as provided in this agreement, Developer makes no other warranties, express or implied, and hereby disclaims all implied warranties, including any warranty of merchantability and warranty of fitness for a particular purpose.
+| Option        | description                                 |
+| ------------- | ------------------------------------------- |
+| -h, --help    | display help message and exit               |
+| -b, --beta    | use the optimized beta build                |
 
 
 ## License
