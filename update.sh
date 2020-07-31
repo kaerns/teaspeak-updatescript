@@ -25,6 +25,7 @@ environment=
 check_curl() {
     if [ ! -x "$(which curl)" ] ; then
         echo "# Could not find curl, which is required for this script."
+        exit 1
     fi
 }
 
