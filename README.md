@@ -15,10 +15,11 @@ This script will pull the latest version from the teaspeak site, unpack it and b
 
 Usage: `update.sh [-h, -b]`
 
-| Option        | description                                 |
-| ------------- | ------------------------------------------- |
-| -h, --help    | display help message and exit               |
-| -b, --beta    | use the optimized beta build                |
+| Option        | description                                                        |
+| ------------- | ------------------------------------------------------------------ |
+| -h, --help    | display help message and exit                                      |
+| -b, --beta    | use the optimized beta build                                       |
+| -f, --force   | enforce the update even if the newest version is already installed |
 
 ## Dependencies
 
