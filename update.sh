@@ -22,6 +22,13 @@ requesturl=
 version=
 environment=
 
+check_curl() {
+    if [ ! -x "$(which curl)" ] ; then
+        echo "# Could not find curl, which is required for this script."
+        exit 1
+    fi
+}
+
 request_version() {
     echo "# Getting version..."
     version=$(curl -s -S -k https://repo.teaspeak.de/server/linux/amd64${branch}/latest)
@@ -40,7 +47,7 @@ check_env() {
 }
 
 update_teaspeak() {
-
+    check_curl
     request_version
     check_env
 

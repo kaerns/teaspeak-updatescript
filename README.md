@@ -20,6 +20,10 @@ Usage: `update.sh [-h, -b]`
 | -h, --help    | display help message and exit               |
 | -b, --beta    | use the optimized beta build                |
 
+## Dependencies
+
+* curl
+
 
 ## License
 
