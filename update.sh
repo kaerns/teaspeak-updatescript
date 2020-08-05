@@ -21,9 +21,10 @@ branch=""
 requesturl=
 version=
 environment=
+force=false
 
 check_curl() {
-    if [ ! -x "$(which curl)" ] ; then
+    if [ ! -x "$(which curl)" ]; then
         echo "# Could not find curl, which is required for this script."
         exit 1
     fi
@@ -36,8 +37,7 @@ request_version() {
 }
 
 check_env() {
-    if [ `getconf LONG_BIT` = "64" ]
-    then
+    if [ `getconf LONG_BIT` = "64" ]; then
         echo "# Detected an 64 bit environment"
 	    environment="amd64"
     else
@@ -46,9 +46,24 @@ check_env() {
     fi
 }
 
+read_version() {
+    if [ -r "buildVersion.txt" ]; then
+        active_version=$(tail -n 1 "buildVersion.txt" | tr "\"" "\n" | head -n 4 | tail -n 1)
+        echo "# Installed version ${active_version}"
+
+        if [[ "$active_version" == "$version" ]]; then
+            if ! $force ; then
+                echo "# Update aborted. Use the --force parameter to update anyway."
+                exit 0
+            fi        
+        fi
+    fi
+}
+
 update_teaspeak() {
     check_curl
     request_version
+    read_version
     check_env
 
     requesturl="https://repo.teaspeak.de/server/linux/${environment}${branch}/TeaSpeak-${version}.tar.gz"
@@ -91,11 +106,17 @@ do
 
 Usage: update.sh [-b|--beta]
 Options: 
-	-b, --beta     use the optimized build
-	-h, --help     display this message and exit
+    -b, --beta     use the optimized build
+    -h, --help     display this message and exit
+    -f, --force    enforce the update even if the newest version is already installed
 EOF
         shift
         exit 0 # script did its job
+    ;;
+
+    -f|--force) # force update
+        force=true    
+    shift
     ;;
 
     *) # default/unknown parameter
