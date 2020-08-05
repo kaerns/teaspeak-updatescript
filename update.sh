@@ -18,10 +18,11 @@
 #
 
 branch=""
-requesturl=
+request_url=
 version=
 environment=
 force=false
+autostart=false
 
 check_curl() {
     if [ ! -x "$(which curl)" ]; then
@@ -37,6 +38,7 @@ request_version() {
 }
 
 check_env() {
+    # read os long bit
     if [ `getconf LONG_BIT` = "64" ]; then
         echo "# Detected an 64 bit environment"
 	    environment="amd64"
@@ -48,6 +50,7 @@ check_env() {
 
 read_version() {
     if [ -r "buildVersion.txt" ]; then
+        # extract current version
         active_version=$(tail -n 1 "buildVersion.txt" | tr "\"" "\n" | head -n 4 | tail -n 1)
         echo "# Installed version ${active_version}"
 
@@ -60,16 +63,35 @@ read_version() {
     fi
 }
 
+stop_server() {
+    if [ -x "teastart.sh" ]; then
+        # check for returned status code
+        if ./teastart.sh status > /dev/null ; then
+            echo "# Server is running; stopping now..."
+            ./teastart.sh stop
+        fi
+    fi
+}
+
+start_server() {
+    if ! $autostart ; then
+        return
+    fi
+    echo "# Starting teaspeak server via './teastart.sh start'"
+    ./teastart.sh start
+}
+
 update_teaspeak() {
     check_curl
     request_version
     read_version
     check_env
+    stop_server
 
-    requesturl="https://repo.teaspeak.de/server/linux/${environment}${branch}/TeaSpeak-${version}.tar.gz"
+    request_url="https://repo.teaspeak.de/server/linux/${environment}${branch}/TeaSpeak-${version}.tar.gz"
 
-    echo "# Downloading from ${requesturl}"
-    curl -s -S "$requesturl" -o updatefile.tar.gz
+    echo "# Downloading from ${request_url}"
+    curl -s -S "$request_url" -o updatefile.tar.gz
 
     echo "# Backing up config and database"
     cp config.yml config.yml.old
@@ -81,6 +103,8 @@ update_teaspeak() {
 
     echo "# Making scripts executable"
     chmod u+x *.sh
+
+    start_server
 
     echo "# TeaSpeak should be now be updated to ${version}"
 }
@@ -109,6 +133,7 @@ Options:
     -b, --beta     use the optimized build
     -h, --help     display this message and exit
     -f, --force    enforce the update even if the newest version is already installed
+    -s, --start    starts the server again after the update (uses teastart.sh start)
 EOF
         shift
         exit 0 # script did its job
@@ -116,13 +141,17 @@ EOF
 
     -f|--force) # force update
         force=true    
-    shift
+        shift
+    ;;
+    -s|--start) # autostart after update
+        autostart=true
+        shift
     ;;
 
     *) # default/unknown parameter
         echo "# Invalid argument(s). Use --help for help."
         shift
-        exit 127 # command not found
+        exit 1 # parameter not found
     ;;
 
 esac
