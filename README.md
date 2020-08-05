@@ -15,14 +15,17 @@ This script will pull the latest version from the teaspeak site, unpack it and b
 
 Usage: `update.sh [-h, -b]`
 
-| Option        | description                                                        |
-| ------------- | ------------------------------------------------------------------ |
-| -h, --help    | display help message and exit                                      |
-| -b, --beta    | use the optimized beta build                                       |
-| -f, --force   | enforce the update even if the newest version is already installed |
+| Option        | description                                                         |
+| ------------- | ------------------------------------------------------------------- |
+| -h, --help    | displays help message and then exits                                |
+| -b, --beta    | uses the optimized beta build                                       |
+| -f, --force   | enforces the update even if the newest version is already installed |
+| -s, --start   | starts the server again after the update (uses teastart.sh start)   |
 
-## Dependencies
 
+## Requirements
+
+* Linux (tested with Ubuntu & Mint)
 * curl
 
 
@@ -36,3 +39,4 @@ This program is free software: you can redistribute it and/or modify it under th
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
+
