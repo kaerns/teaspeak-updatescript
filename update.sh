@@ -1,7 +1,7 @@
 #!/bin/bash
 #
-#    TeaSpeak Update Script (https://github.com/essemX/teaspeak-updatescript)
-#    Copyright (C) 2020 essemX (https://github.com/essemX)
+#    TeaSpeak Update Script (https://github.com/kaerns/teaspeak-updatescript)
+#    Copyright (C) 2020 essemX (https://github.com/kaerns)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -123,8 +123,8 @@ do
 
     -h|--help) # help
         cat << EOF
-# TeaSpeak Update Script (https://github.com/essemX/teaspeak-updatescript)
-# Maintained by essemX (https://github.com/essemX)
+# TeaSpeak Update Script (https://github.com/kaerns/teaspeak-updatescript)
+# Maintained by essemX (https://github.com/kaerns)
 # Contributers: 
 	Coolguy3289 (https://github.com/Coolguy3289)
 
